@@ -1,6 +1,5 @@
+import 'home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-// ignore: file_names
 
 class CustomerHomeScreen extends StatefulWidget {
   const CustomerHomeScreen({super.key});
@@ -10,58 +9,56 @@ class CustomerHomeScreen extends StatefulWidget {
 }
 
 class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
+  int _selectedIndex = 0;
+  final List<Widget> _tabs = [
+    HomeScreen(),
+    const Center(child: Text('category screen')),
+    const Center(child: Text('shop screen')),
+    const Center(child: Text('Cart screen')),
+    const Center(child: Text('Profile screen')),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 9,
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.yellow.shade700,
-          title: const CupertinoSearchTextField(),
-          bottom: const TabBar(
-            isScrollable: true,
-            indicatorColor: Colors.pink,
-            indicatorWeight: 8,
-            tabs: [
-              RepeatedTab(label: 'Men'),
-              RepeatedTab(label: 'Women'),
-              RepeatedTab(label: 'Shoes'),
-              RepeatedTab(label: 'Bags'),
-              RepeatedTab(label: 'Jewellery'),
-              RepeatedTab(label: 'Electronics'),
-              RepeatedTab(label: 'Accessories'),
-              RepeatedTab(label: 'Kids'),
-              RepeatedTab(label: 'Beauty'),
-            ],
+    return Scaffold(
+      body: _tabs[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+       backgroundColor: Colors.black,
+        elevation: 0.0,
+        type: BottomNavigationBarType.fixed,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
+        selectedItemColor: Colors.amber.shade400,
+        unselectedItemColor: Colors.white,
+        currentIndex: _selectedIndex,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            
           ),
-        ),
-        body: const TabBarView(children: [
-          Center(child: Text('Men')),
-          Center(child: Text('Women')),
-          Center(child: Text('Shoes')),
-          Center(child: Text('Bags')),
-          Center(child: Text('Jewellery')),
-          Center(child: Text('Electronics')),
-          Center(child: Text('Accessories')),
-          Center(child: Text('Kids')),
-          Center(child: Text('Beauty')), 
-        ]),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shop),
+            label: 'Store',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Shop',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
       ),
     );
-  }
-}
-
-class RepeatedTab extends StatelessWidget {
-  final String label;
-  const RepeatedTab({Key? key, required this.label}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Tab(
-        child: Text(
-      label,
-      style: TextStyle(color: Colors.indigo.shade600),
-    ));
   }
 }
