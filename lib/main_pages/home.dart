@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_mysql_udemy/minor_screens/search.dart';
+//import 'package:flutter/material.dart';
+//import 'package:flutter/cupertino.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,8 +18,55 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Colors.yellow.shade700,
-          title: const CupertinoSearchTextField(),
+          backgroundColor: Colors.grey.shade300,
+          title: InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SearchScreen()));
+            },
+            child: Container(
+              height: 45,
+              decoration: BoxDecoration(
+                  color: Colors.indigo.shade500,
+                  borderRadius: BorderRadius.circular(15)),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 0.0),
+                          child: Icon(
+                            Icons.search,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          'What are you looking for?',
+                          style: TextStyle(color: Colors.white, fontSize: 16.0),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 45,
+                      width: 80,
+                      decoration: BoxDecoration(
+                          color: Colors.amberAccent,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: const Center(
+                        child: Text(
+                          'Search',
+                          style:
+                              TextStyle(color: Colors.indigo, fontSize: 16.0),
+                        ),
+                      ),
+                    ),
+                  ]),
+            ),
+          ),
           bottom: const TabBar(
             isScrollable: true,
             indicatorColor: Colors.pink,
@@ -44,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Center(child: Text('Electronics')),
           Center(child: Text('Accessories')),
           Center(child: Text('Kids')),
-          Center(child: Text('Beauty')), 
+          Center(child: Text('Beauty')),
         ]),
       ),
     );
@@ -53,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class RepeatedTab extends StatelessWidget {
   final String label;
-  const RepeatedTab({Key? key, required this.label}) : super(key: key);
+  const RepeatedTab({super.key, required this.label});
 
   @override
   Widget build(BuildContext context) {

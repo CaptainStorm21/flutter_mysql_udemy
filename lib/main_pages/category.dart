@@ -11,7 +11,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: ,),
+      appBar: AppBar(title: const Text('Category')),
     );
   }
 }
